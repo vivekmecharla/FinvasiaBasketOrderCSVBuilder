@@ -83,38 +83,25 @@ public class BuildCSV {
         String callExitHedge = NFO_OPTIDX + instrument + ",CE," + callExitHedgeStrike + "," + expiry + FA_74029_SELL_C_NRML_MKT_DAY_0 + quantity + TRUE_5;
         String callEntryStrike = NFO_OPTIDX + instrument + ",CE," + callEntryStrikeToken + "," + expiry + FA_74029_SELL_C_NRML_MKT_DAY_0 + quantity + TRUE_5;
 
-        bufferedWriter.write(putExitStrike);
+        writeLine(bufferedWriter, putExitStrike);
+        writeLine(adjustHedge, bufferedWriter, putEntryHedge);
+        writeLine(bufferedWriter, callExitStrike);
+        writeLine(adjustHedge, bufferedWriter, callEntryHedge);
+        writeLine(adjustHedge, bufferedWriter, putExitHedge);
+        writeLine(bufferedWriter, putEntryStrike);
+        writeLine(adjustHedge, bufferedWriter, callExitHedge);
+        writeLine(bufferedWriter, callEntryStrike);
+    }
+
+    private static void writeLine(BufferedWriter bufferedWriter, String line) throws IOException {
+        bufferedWriter.write(line);
         bufferedWriter.newLine();
+    }
 
-        if (adjustHedge.equalsIgnoreCase("Y")) {
-            bufferedWriter.write(putEntryHedge);
-            bufferedWriter.newLine();
+    private static void writeLine(String writeLine, BufferedWriter bufferedWriter, String line) throws IOException {
+        if (writeLine.equalsIgnoreCase("Y")) {
+            writeLine(bufferedWriter, line);
         }
-
-        bufferedWriter.write(callExitStrike);
-        bufferedWriter.newLine();
-
-        if (adjustHedge.equalsIgnoreCase("Y")) {
-            bufferedWriter.write(callEntryHedge);
-            bufferedWriter.newLine();
-        }
-
-        if (adjustHedge.equalsIgnoreCase("Y")) {
-            bufferedWriter.write(putExitHedge);
-            bufferedWriter.newLine();
-        }
-
-        bufferedWriter.write(putEntryStrike);
-        bufferedWriter.newLine();
-
-
-        if (adjustHedge.equalsIgnoreCase("Y")) {
-            bufferedWriter.write(callExitHedge);
-            bufferedWriter.newLine();
-        }
-
-        bufferedWriter.write(callEntryStrike);
-        bufferedWriter.newLine();
     }
 
     private static int getStrikeDifference(String instrument) {
