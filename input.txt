@@ -1,0 +1,9 @@
+expiry:27-APR-2023
+instrument:NIFTY
+quantity:1800
+adjust_hedge:Y
+hedge_distance:4
+put_exit_strike:0
+put_entry_strike:17500
+call_exit_strike:0
+call_entry_strike:17950
